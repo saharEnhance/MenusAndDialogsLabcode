@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DroidCafeInput.iml" filepath="$PROJECT_DIR$/DroidCafeInput.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DroidCafeInput.iml" filepath="$PROJECT_DIR$/DroidCafeInput.iml" group="DroidCafeInput" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="DroidCafeInput/app" />
     </modules>
   </component>
 </project>

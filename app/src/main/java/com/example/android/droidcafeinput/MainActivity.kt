@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.android.droidcafeinput
 
-package com.example.android.droidcafeinput;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.content.Intent
+import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
+import com.example.android.droidcafeinput.MainActivity
 
 /**
  * This app demonstrates images used as buttons and a floating action button to
@@ -32,14 +32,9 @@ import android.widget.Toast;
  * to make a choice. The app displays a Toast message showing the user’s choice
  * and sends the choice as data with an intent to launch the second activity.
  */
-public class MainActivity extends AppCompatActivity {
-
-    // Tag for the intent extra.
-    public static final String EXTRA_MESSAGE =
-            "com.example.android.droidcafeinput.extra.MESSAGE";
-
+class MainActivity : AppCompatActivity() {
     // The order message, displayed in the Toast and sent to the new Activity.
-    private String mOrderMessage;
+    private var mOrderMessage: String? = null
 
     /**
      * Creates the content view, the toolbar, and the floating action button.
@@ -48,23 +43,18 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param savedInstanceState Saved instance state bundle.
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,
-                        OrderActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, mOrderMessage);
-                startActivity(intent);
-            }
-        });
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
+            val intent = Intent(this@MainActivity ,
+                    OrderActivity::class.java)
+            intent.putExtra(EXTRA_MESSAGE , mOrderMessage)
+            startActivity(intent)
+        }
     }
 
     /**
@@ -73,11 +63,10 @@ public class MainActivity extends AppCompatActivity {
      * @param menu Menu to inflate.
      * @return Returns true if the menu inflated.
      */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        menuInflater.inflate(R.menu.menu_main , menu)
+        return true
     }
 
     /**
@@ -86,21 +75,17 @@ public class MainActivity extends AppCompatActivity {
      * @param item Item clicked.
      * @return True if one of the defined items was clicked.
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        val id = item.itemId
 
         // This comment suppresses the Android Studio warning about simplifying
         // the return statements.
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return if (id == R.id.action_settings) {
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
     /**
@@ -108,33 +93,37 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param message Message to display.
      */
-    public void displayToast(String message) {
-        Toast.makeText(getApplicationContext(), message,
-                Toast.LENGTH_SHORT).show();
+    fun displayToast(message: String?) {
+        Toast.makeText(applicationContext , message ,
+                Toast.LENGTH_SHORT).show()
     }
 
     /**
      * Shows a message that the donut image was clicked.
      */
-    public void showDonutOrder(View view) {
-        mOrderMessage = getString(R.string.donut_order_message);
-        displayToast(mOrderMessage);
+    fun showDonutOrder(view: View?) {
+        mOrderMessage = getString(R.string.donut_order_message)
+        displayToast(mOrderMessage)
     }
 
     /**
      * Shows a message that the ice cream sandwich image was clicked.
      */
-    public void showIceCreamOrder(View view) {
-        mOrderMessage = getString(R.string.ice_cream_order_message);
-        displayToast(mOrderMessage);
+    fun showIceCreamOrder(view: View?) {
+        mOrderMessage = getString(R.string.ice_cream_order_message)
+        displayToast(mOrderMessage)
     }
 
     /**
      * Shows a message that the froyo image was clicked.
      */
-    public void showFroyoOrder(View view) {
-        mOrderMessage = getString(R.string.froyo_order_message);
-        displayToast(mOrderMessage);
+    fun showFroyoOrder(view: View?) {
+        mOrderMessage = getString(R.string.froyo_order_message)
+        displayToast(mOrderMessage)
     }
 
+    companion object {
+        // Tag for the intent extra.
+        const val EXTRA_MESSAGE = "com.example.android.droidcafeinput.extra.MESSAGE"
+    }
 }
