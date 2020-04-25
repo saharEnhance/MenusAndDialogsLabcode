@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (C) 2018 Google Inc.
  *
@@ -24,7 +26,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.example.android.droidcafeinput.MainActivity
 
 /**
  * This app demonstrates images used as buttons and a floating action button to
@@ -75,19 +76,39 @@ class MainActivity : AppCompatActivity() {
      * @param item Item clicked.
      * @return True if one of the defined items was clicked.
      */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.itemId
-
-        // This comment suppresses the Android Studio warning about simplifying
-        // the return statements.
-        return if (id == R.id.action_order) {
-            true
-        } else super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        when (item.itemId)
+        {
+            R.id.action_order ->
+            {
+                val intent = Intent(this@MainActivity ,
+                        OrderActivity::class.java)
+                intent.putExtra(EXTRA_MESSAGE , mOrderMessage)
+                startActivity(intent)
+                return true
+            }
+            R.id.action_status ->
+            {
+                displayToast(getString(R.string.action_status_message))
+                return true
+            }
+            R.id.action_favorites ->
+            {
+                displayToast(getString(R.string.action_favorites_message))
+                return true
+            }
+            R.id.action_contact ->
+            {
+                displayToast(getString(R.string.action_contact_message))
+                return true
+            }
+            else ->
+            {
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
-
     /**
      * Displays a Toast with the message.
      *
@@ -127,3 +148,4 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_MESSAGE = "com.example.android.droidcafeinput.extra.MESSAGE"
     }
 }
+
